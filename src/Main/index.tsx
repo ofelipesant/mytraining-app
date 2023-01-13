@@ -1,21 +1,32 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import Header from '../components/Header'
-import { SafeAreaView } from "react-native";
 import Trainings from "../screens/Trainings";
+import CreateTraining from "../screens/CreateTraining";
+import { NavigationContainer } from "@react-navigation/native"
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ScreenTitle from "../components/ScreenTitle";
+
+const Stack = createNativeStackNavigator()
 
 export default function Main(){
     return(
-        <SafeAreaView style={styles.containerSafeArea}>
-            <Header />
-            <Trainings/>
-        </SafeAreaView>
+        <NavigationContainer>
+            <Stack.Navigator>
+                 <Stack.Screen 
+                    name="Trainings" 
+                    component={Trainings}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+
+                <Stack.Screen
+                    name="CreateTraining"
+                    component={CreateTraining}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
     )
 }
-
-const styles = StyleSheet.create({
-    containerSafeArea: {
-      flex: 1,
-      backgroundColor: '#3D3D3D',
-    },
-  });

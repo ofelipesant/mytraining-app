@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import { View, Text } from "react-native";
 import ScreenTitle from "../../components/ScreenTitle";
 import TrainingListItem from "../../components/TrainingListItem";
 import { Container } from "./styles";
