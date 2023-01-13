@@ -2,7 +2,8 @@ import styled from "styled-components/native";
 
 export const ButtonContainer = styled.View`
     width: 100%;
-    padding: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 `
 export const Button = styled.TouchableOpacity`
     background-color: #618985;
