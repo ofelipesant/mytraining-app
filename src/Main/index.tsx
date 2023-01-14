@@ -3,7 +3,7 @@ import Trainings from "../screens/Trainings";
 import CreateTraining from "../screens/CreateTraining";
 import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ScreenTitle from "../components/ScreenTitle";
+import TrainingDetails from "../screens/TrainingDetails";
 
 const Stack = createNativeStackNavigator()
 
@@ -22,6 +22,14 @@ export default function Main(){
                 <Stack.Screen
                     name="CreateTraining"
                     component={CreateTraining}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+
+                <Stack.Screen
+                    name="TrainingDetails"
+                    component={TrainingDetails}
                     options={{
                         headerShown: false
                     }}
