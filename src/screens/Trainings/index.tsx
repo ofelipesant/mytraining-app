@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import ScreenTitle from "../../components/ScreenTitle";
 import TrainingListItem from "../../components/TrainingListItem";
 import { Container } from "./styles";
-import { getTrainings } from "../../services/getTrainings";
+import { getTrainings } from "../../services/Trainings";
 import CreateTrainingButton from "../../components/CreateTrainingButton";
 
 export default function Trainings(){
@@ -23,7 +23,11 @@ export default function Trainings(){
             <CreateTrainingButton/>
             {trainings && trainings.map((training) => {
                 return(
-                    <TrainingListItem name={training.name} key={training._id}/>
+                    <TrainingListItem 
+                        name={training.name} 
+                        key={training._id} 
+                        training={training._id}
+                    />
                 )
             })}
         </Container>
