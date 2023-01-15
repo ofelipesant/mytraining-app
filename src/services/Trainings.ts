@@ -17,3 +17,12 @@ export async function getTrainingsById(id:string){
         console.log(`[getTrainingsById]: ${error}`)
     }
 }
+
+export async function deleteTraining(id:string){
+    try{
+        await api.delete(`/trainings/${id}`)
+        return
+    } catch(error){
+        console.log(`[deleteTraining]: ${error}`)
+    }
+}

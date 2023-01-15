@@ -39,3 +39,29 @@ export const ExerciseInfos = styled.Text`
     color: white;
     margin-right: 24px;
 `
+
+export const ButtonContainer = styled.View`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+`
+
+export const DeletButton = styled.TouchableOpacity`
+    width: 136px;
+    height: 40px;
+    border: 3px solid #E08D79;
+    background-color: transparent;
+    border-radius: 4px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+`
+
+export const TextButton = styled.Text`
+    color: #E08D79;
+    font-weight: 700;
+    font-size: 22px;
+    margin-left: 8px;
+`
