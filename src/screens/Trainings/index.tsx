@@ -15,7 +15,7 @@ export default function Trainings(){
 
     useEffect(() => {
         fetchTrainings()
-    },[])
+    },[trainings])
 
     return(
         <Container>
