@@ -14,47 +14,51 @@ import {
 import { View, TouchableWithoutFeedback, Keyboard } from "react-native"
 import ScreenTitle from "../../components/ScreenTitle";
 import { MaterialIcons } from '@expo/vector-icons'; 
-import { useForm } from 'react-hook-form'
+import { createTraining } from "../../services/Trainings";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CreateTraining(){
-    const { register, setValue, handleSubmit } = useForm()
     const [ trainingName, setTrainingName ] = useState('')
-    const [ exercises, setExercises ] = useState([
-        {
-            name: '',
-            weight: '',
-            series: '',
-            repetitions: ''
-        },
-    ])
+    const [exerciseName, setExerciseName ] = useState('')
+    const [weight, setWeight ] = useState('')
+    const [series, setSeries] = useState('')
+    const [repetitions, setRepetitions] = useState('')
+    const [ exercises, setExercises ] = useState([])
 
-    function addExerciseCard(data){
-        const exerciseDataDefault = [
-            {
-                name: '',
-                weight: '',
-                series: '',
-                repetitions: ''
-            }
-        ]
-        const exerciseList = [...exercises, data, exerciseDataDefault]
+    const navigation = useNavigation()
+
+    function setExerciseData(){
+        const exerciseData = {
+            name: exerciseName,
+            weight: weight,
+            series: series,
+            repetitions: repetitions
+        }
+
+        const exerciseList = [...exercises]
+        exerciseList.push(exerciseData)
         setExercises(exerciseList)
     }
 
-    function saveTraining(){
-        console.log('exercícios', exercises)
+    function addExerciseCard(){
+        setExerciseData()
     }
 
-    useEffect(() => {
-        register('name')
-        register('weight')
-        register('repetitions')
-        register('series')
-    }, [register])
+    async function saveTraining(){
+      setExerciseData()
 
-    useEffect(() => {
-        console.log('training name', trainingName)
-    }, [trainingName])
+      const data = {
+        name: trainingName,
+        exercises: exercises
+      }
+
+      if(data.exercises[0].name == ""){
+        data.exercises.shift()
+      }
+
+      const request = await createTraining(data)
+      navigation.navigate("TrainingDetails", request?.data._id)
+    }
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -82,31 +86,31 @@ export default function CreateTraining(){
                                     <InputTrainingCard
                                         placeholder="Nome do exercício"
                                         placeholderTextColor={"#b8b8b8ca"}
-                                        onChangeText={(text) => setValue('name', text)}
+                                        onChangeText={setExerciseName}
                                     />
                                     <InputTrainingCard
                                         placeholder="Peso (kg)"
                                         keyboardType="numeric"
                                         placeholderTextColor={"#b8b8b8ca"}
-                                        onChangeText={(text) => setValue('weight', text)}
+                                        onChangeText={setWeight}
                                     />
                                     <InputTrainingCard
                                         placeholder="Séries"
                                         keyboardType="numeric"
                                         placeholderTextColor={"#b8b8b8ca"}
-                                        onChangeText={(text) => setValue('series', text)}
+                                        onChangeText={setSeries}
                                     />
                                     <InputTrainingCard
                                         placeholder="Repetições"
                                         keyboardType="numeric"
                                         placeholderTextColor={"#b8b8b8ca"}
-                                        onChangeText={(text) => setValue('repetitions', text)}
+                                        onChangeText={setRepetitions}
                                     />
                                 </View>
                             </ExerciseRegisterCard>
                             )
                         })}
-                        <AddExerciseButton onPress={handleSubmit(addExerciseCard)}>
+                        <AddExerciseButton onPress={() => addExerciseCard()}>
                             <MaterialIcons name="add" size={32} color="#3581B8" />
                         </AddExerciseButton>
                     </RegisterContainer>

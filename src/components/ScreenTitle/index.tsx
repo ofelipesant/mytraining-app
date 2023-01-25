@@ -19,7 +19,7 @@ export default function ScreenTitle(props:PropsType){
                     name="arrow-back" 
                     size={32} color="white" 
                     style={styles.icon} 
-                    onPress={() => navigation.goBack()}
+                    onPress={() => navigation.navigate("Trainings")}
                 /> : null     
             }
             <Title>{title}</Title>
