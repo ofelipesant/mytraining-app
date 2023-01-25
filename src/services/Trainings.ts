@@ -26,3 +26,12 @@ export async function deleteTraining(id:string){
         console.log(`[deleteTraining]: ${error}`)
     }
 }
+
+export async function createTraining(data){
+    try{
+        const request = await api.post("/trainings", data)
+        return request
+    } catch(error){
+        console.log(`[createTraining]: ${error}`)
+    }
+}
